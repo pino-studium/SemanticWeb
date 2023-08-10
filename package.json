@@ -9,8 +9,8 @@
     "xmltodb": "xmltodb.js"
   },
   "author": "",
-  "dependencies": {
-  },
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "fs": "^0.0.1-security"
   }
 }
