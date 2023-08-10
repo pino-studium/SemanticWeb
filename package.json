@@ -1,0 +1,16 @@
+{
+  "name": "streetorytools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "type": "module",
+  "scripts": {
+    "htmltodb": "htmltodb.js",
+    "xmltodb": "xmltodb.js"
+  },
+  "author": "",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
