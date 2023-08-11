@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 
 const url = 'https://www.leipziginfo.de/adressen/kategorie/sehenswuerdigkeit/';
+const sightseeingNames = [];
 
 fetch(url)
     .then(response => response.text())
@@ -11,7 +12,8 @@ fetch(url)
 
         streetAddressElements.each((index, element) => {
             const text = $(element).text().trim();
-            console.log(text);
+            sightseeingNames.push(text)
+            console.log(sightseeingNames);
         });
     })
     .catch(error => {
