@@ -6,11 +6,14 @@
   "type": "module",
   "scripts": {
     "htmltodb": "scraping_leipziginfo.js",
-    "xmltodb": "xmltodb.js"
+    "xmltodb": "xmltodb.js",
+    "build": "tsc"
+    
   },
   "author": "",
   "devDependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "typescript": "^5.1.6"
   }
 }
