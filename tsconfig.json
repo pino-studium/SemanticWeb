@@ -1,11 +1,35 @@
+// {
+//     "compilerOptions": {
+//         "target": "ES6",
+//         "outDir": "./dist",
+//         "moduleResolution": "node",
+//         "allowImportingTsExtensions": "true"
+//         // ...weitere Einstellungen...
+      
+//     },
+//     "include": ["src/**/*.ts"],
+//     "exclude": ["node_modules"]
+//   }
+
 {
     "compilerOptions": {
-        "target": "ES6",
+        "target": "es6",
+        "module": "commonjs",
         "outDir": "./dist",
-        "moduleResolution": "node",
-        // ...weitere Einstellungen...
-      
+        "baseUrl": "./",
+        "sourceMap": true,
+        "declaration": true,
+        "removeComments": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        "forceConsistentCasingInFileNames": false,
+        "noFallthroughCasesInSwitch": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
     },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules"]
-  }
+  "include": ["src"]
+}
