@@ -6,6 +6,7 @@ import ExtractSrassenverzeichnis from "./scraping_strassenverzeichnis";
 
 export default class DataUploader{
 
+    uploadService = new UploadService();
     rdfParser = new RdfParser();
 
     async runAll() {
@@ -33,9 +34,9 @@ export default class DataUploader{
 
         const rdfData = this.rdfParser.createRdfData(triples);
 
-        console.log(rdfData);
-        const uploadService = new UploadService();
-        uploadService.uploadData(rdfData);
+        //console.log(rdfData);
+        
+        this.uploadService.uploadData(rdfData);
     }
 
     async processExtractSrassenverzeichnis() {
@@ -46,11 +47,13 @@ export default class DataUploader{
         const names = parsedXmlData[1];
         const erlaeuterung = parsedXmlData[2];
 
-
+        
         const triples = this.rdfParser.createTriples(schluessel, `http://schema.org/name`, names)
             .concat(this.rdfParser.createTriples(schluessel, `https://schema.org/description`, erlaeuterung))
         
         const rdfData = this.rdfParser.createRdfData(triples);
         console.log(rdfData);
+
+        this.uploadService.uploadData(rdfData);
     }
 }

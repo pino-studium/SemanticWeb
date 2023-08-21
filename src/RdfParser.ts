@@ -6,7 +6,7 @@ export default class RdfParser {
         for (let i = 0; i < triples.length; i++) {
             rdfData = rdfData + `${this.checkIfLink(triples[i].subject)} ${this.checkIfLink(triples[i].predicate)} ${this.checkIfLink(triples[i].object)} .\n`;
         }
-        console.log(rdfData);
+        //console.log(rdfData);
         return rdfData;
 
     }

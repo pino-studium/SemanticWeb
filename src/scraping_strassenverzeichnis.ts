@@ -29,8 +29,8 @@ export default class ExtractSrassenverzeichnis {
 
                         if (name && erlaeuterung && schluessel) {
                             resultSchluessel.push(schluessel);
-                            resultSchluessel.push(name);
-                            resultSchluessel.push(erlaeuterung);
+                            resultName.push(name);
+                            resultErlaeuterung.push(erlaeuterung);
                         }
                         
                     }
