@@ -6,7 +6,7 @@ export default class UploadService {
     fetch(this.serverURL, {
       method: 'POST',
       headers: {
-        'Content-type': 'text/turtle; charset="utf-8"', 
+        'Content-type': 'text/turtle; charset=utf-8', 
       },
       body: rdfData,
     })

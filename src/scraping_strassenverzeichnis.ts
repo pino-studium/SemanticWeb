@@ -20,8 +20,8 @@ export default class ExtractSrassenverzeichnis {
                 const strassen = result.Strassenverzeichnis.STRASSE;
                 
                 for (const strasseData of strassen) {
-                    const stammdaten = strasseData.STAMMDATEN && Array.isArray(strasseData.STAMMDATEN) ? strasseData.STAMMDATEN[0] : null;
-                    const erlaeuterung = strasseData.ERKLAERUNG && Array.isArray(strasseData.ERKLAERUNG) ? strasseData.ERKLAERUNG[0].ERLAEUTERUNG[0] : null;
+                    const stammdaten = strasseData.STAMMDATEN && Array.isArray(strasseData.STAMMDATEN) ? strasseData.STAMMDATEN[0].trim() : null;
+                    const erlaeuterung = strasseData.ERKLAERUNG && Array.isArray(strasseData.ERKLAERUNG) ? strasseData.ERKLAERUNG[0].ERLAEUTERUNG[0].trim() : null;
 
                     if (stammdaten) {
                         const name = stammdaten.NAME && stammdaten.NAME[0].trim(); 
