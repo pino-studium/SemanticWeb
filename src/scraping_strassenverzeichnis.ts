@@ -28,7 +28,7 @@ export default class ExtractSrassenverzeichnis {
                         const schluessel = stammdaten.SCHLUESSEL && stammdaten.SCHLUESSEL[0].trim(); 
 
                         if (name && erlaeuterung && schluessel) {
-                            resultSchluessel.push(schluessel);
+                            resultSchluessel.push("http://example.org/" + schluessel);
                             resultName.push(name);
                             resultErlaeuterung.push(erlaeuterung);
                         }
