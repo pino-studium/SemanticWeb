@@ -2,16 +2,16 @@ import LeInScraper from "./LeInScraper";
 import RdfParser from "./RdfParser";
 import UploadService from "./UploadService";
 import ExtractSrassenverzeichnis from "./scraping_strassenverzeichnis";
-//import UploadService from "./UploadService";
 
-export default class DataUploader{
 
+export default class DataUploader {
+ 
     uploadService = new UploadService();
     rdfParser = new RdfParser();
 
     async runAll() {
         await this.uploadLeInData();
-        await this.processExtractSrassenverzeichnis();
+        //await this.processExtractSrassenverzeichnis();
     }
 
     async uploadLeInData() {
@@ -27,15 +27,14 @@ export default class DataUploader{
         });
 
 
-        
+
         const triples = this.rdfParser.createTriples(sightsHref, `http://schema.org/name`, sightsName)
             .concat(this.rdfParser.createTriples(sightsHref, `http://schema.org/image`, sightsImage))
             .concat(this.rdfParser.createTriples(sightsHref, `http://schema.org/PostalAddress`, sightsStreetWithoutNumber));
 
         const rdfData = this.rdfParser.createRdfData(triples);
-
-        //console.log(rdfData);
-        
+        console.log(rdfData);
+       
         this.uploadService.uploadData(rdfData);
     }
 
@@ -47,10 +46,10 @@ export default class DataUploader{
         const names = parsedXmlData[1];
         const erlaeuterung = parsedXmlData[2];
 
-        
+
         const triples = this.rdfParser.createTriples(schluessel, `http://schema.org/name`, names)
             .concat(this.rdfParser.createTriples(schluessel, `https://schema.org/description`, erlaeuterung))
-        
+
         const rdfData = this.rdfParser.createRdfData(triples);
         console.log(rdfData);
 
