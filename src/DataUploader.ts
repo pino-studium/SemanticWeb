@@ -39,15 +39,18 @@ export default class DataUploader{
     }
 
     async processExtractSrassenverzeichnis() {
+
         const extractSrassenverzeichnis = new ExtractSrassenverzeichnis();
         const parsedXmlData = await extractSrassenverzeichnis.parseXmlFile();
-        if (parsedXmlData) {
-            const rdfData2 = this.rdfParser.createRdfData(parsedXmlData);
-            console.log(rdfData2);
-        } else {
-            console.error('Fehler beim Parsen der XML-Datei.');
-        }
-    }
+        const schluessel = parsedXmlData[0];
+        const names = parsedXmlData[1];
+        const erlaeuterung = parsedXmlData[2];
 
-    
+
+        const triples = this.rdfParser.createTriples(schluessel, `http://schema.org/name`, names)
+            .concat(this.rdfParser.createTriples(schluessel, `https://schema.org/description`, erlaeuterung))
+        
+        const rdfData = this.rdfParser.createRdfData(triples);
+        console.log(rdfData);
+    }
 }

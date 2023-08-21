@@ -12,7 +12,7 @@ export default class RdfParser {
     }
 
     checkIfLink(input: string){
-        if(input.startsWith("http")){
+        if(input && input.startsWith("http")){
             return "<" + input + ">";
         } else {
             return "\"" + input + "\"";

@@ -1,10 +1,14 @@
 import * as fs from 'fs/promises';
 import * as xml2js from 'xml2js';
-import Triple from "./Triple";
+//import Triple from "./Triple";
 
 export default class ExtractSrassenverzeichnis {
     async parseXmlFile() {
-        const datenbank: Triple[] = [];
+        const resultSchluessel: string[] = [];
+        const resultName: string[] = [];
+        const resultErlaeuterung: string[] = [];
+        const resultAll: string[][] = [resultSchluessel,resultName,resultErlaeuterung];
+
         try {
             const xmlData = await fs.readFile('src/Strassenverzeichnis.xml', 'utf-8');
 
@@ -24,8 +28,9 @@ export default class ExtractSrassenverzeichnis {
                         const schluessel = stammdaten.SCHLUESSEL && stammdaten.SCHLUESSEL[0].trim(); 
 
                         if (name && erlaeuterung && schluessel) {
-                            const triple = new Triple(name , erlaeuterung, schluessel)
-                             datenbank.push(triple);
+                            resultSchluessel.push(schluessel);
+                            resultSchluessel.push(name);
+                            resultSchluessel.push(erlaeuterung);
                         }
                         
                     }
@@ -38,7 +43,7 @@ export default class ExtractSrassenverzeichnis {
             console.error('Fehler:', error);
             
         }
-        return datenbank;
+        return resultAll;
     }
     
 }
