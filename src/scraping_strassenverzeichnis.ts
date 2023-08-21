@@ -28,7 +28,7 @@ export default class ExtractSrassenverzeichnis {
                         const schluessel = stammdaten.SCHLUESSEL && stammdaten.SCHLUESSEL[0].trim(); 
 
                         if (name && erlaeuterung && schluessel) {
-                            resultSchluessel.push("http://example.org/" + schluessel);
+                            resultSchluessel.push("https://github.com/pino-studium/streetory-tools/" + schluessel);
                             resultName.push(name);
                             resultErlaeuterung.push(erlaeuterung);
                         }
