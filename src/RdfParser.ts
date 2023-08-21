@@ -4,11 +4,20 @@ export default class RdfParser {
     createRdfData(triples: Triple[]) {
         var rdfData = ''
         for (let i = 0; i < triples.length; i++) {
-            rdfData = rdfData + `${triples[i].subject} ${triples[i].predicate} ${triples[i].object} .\n`;
+            rdfData = rdfData + `${this.checkIfLink(triples[i].subject)} ${this.checkIfLink(triples[i].predicate)} ${this.checkIfLink(triples[i].object)} .\n`;
         }
         console.log(rdfData);
         return rdfData;
 
+    }
+
+    checkIfLink(input: string){
+        if(input.startsWith("http")){
+            return "<" + input + ">";
+        } else {
+            return "\"" + input + "\"";
+        }
+        
     }
 
     createTriples(subjects: string[], predicate: string, objects: string[]) {
@@ -21,6 +30,7 @@ export default class RdfParser {
 
         return triples;
     }
+    
 }
 
 

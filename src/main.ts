@@ -1,6 +1,6 @@
 import LeInScraper from "./LeInScraper";
 import RdfParser from "./RdfParser";
-import UploadService from "./UploadService";
+//import UploadService from "./UploadService";
 
 async function main(){
 
@@ -24,8 +24,8 @@ async function main(){
     const rdfData = rdfParser.createRdfData(triples); 
     console.log(rdfData);
 
-    const uploadService = new UploadService();
-    uploadService.uploadData(rdfData);
+    //const uploadService = new UploadService();
+    //uploadService.uploadData(rdfData);
 }
 
 main();
