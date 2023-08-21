@@ -1,10 +1,7 @@
 import LeInScraper from "./LeInScraper";
 import RdfParser from "./RdfParser";
 //import UploadService from "./UploadService";
-<<<<<<< HEAD
-=======
 import ExtractSrassenverzeichnis from "./scraping_strassenverzeichnis";
->>>>>>> 7b9242e19bd201f4645e98c67aa6eaa66910499c
 
 async function main(){
 
@@ -27,10 +24,6 @@ async function main(){
 
     const rdfData = rdfParser.createRdfData(triples);
 
-<<<<<<< HEAD
-    //const uploadService = new UploadService();
-    //uploadService.uploadData(rdfData);
-=======
     console.log(rdfData);
     const extractSrassenverzeichnis = new ExtractSrassenverzeichnis();
     const parsedXmlData = await extractSrassenverzeichnis.parseXmlFile();
@@ -41,7 +34,6 @@ async function main(){
         console.error('Fehler beim Parsen der XML-Datei.');
     }
     
->>>>>>> 7b9242e19bd201f4645e98c67aa6eaa66910499c
 }
 
 
