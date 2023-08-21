@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
+  "type": "module",
   "scripts": {
     "htmltodb": "scraping_leipziginfo.js",
     "xmltodb": "xmltodb.js",
