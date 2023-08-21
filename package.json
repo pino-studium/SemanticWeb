@@ -10,7 +10,7 @@
     "start": "tsc && node dist/main.js"
   },
   "author": "",
-  "devDependencies": {
+  "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "fs": "^0.0.1-security",
     "ts-node": "^10.9.1",
