@@ -25,7 +25,7 @@ export default class LeInUploader {
 
         const rdfData = rdfParser.createRdfData(triples);
 
-        console.log(rdfData);
+        //console.log(rdfData);
         const uploadService = new UploadService();
         uploadService.uploadData(rdfData);
     }
