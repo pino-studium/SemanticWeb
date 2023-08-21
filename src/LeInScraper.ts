@@ -72,17 +72,20 @@ export default class LeInScraper {
 
     deleteHouseNumber(inputString: string) {
 
-        for (let i = inputString.length - 1; i >= 0; i--) {
+        for (let i = inputString.length - 1; i >= 0 && inputString.length - i < 7; i--) {
             if (isNaN(Number(inputString[i]))) continue;
             for (let j = 0; j < inputString.length; j++) {
                 i--;
-                if (!isNaN(Number(inputString[i])) || !isNaN(Number(inputString[i]))) continue;
+                if (!isNaN(Number(inputString[i])) || !isNaN(Number(inputString[i-1]))) continue;
                 return inputString.slice(0, i + 1).trim();
             }
 
         }
         return inputString;
     }
+
+    
+
 
 
 
