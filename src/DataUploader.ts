@@ -11,7 +11,7 @@ export default class DataUploader {
 
     async runAll() {
         await this.uploadLeInData();
-        //await this.processExtractSrassenverzeichnis();
+        await this.processExtractSrassenverzeichnis();
     }
 
     async uploadLeInData() {
