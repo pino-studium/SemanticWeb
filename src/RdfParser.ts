@@ -1,4 +1,4 @@
-import Triple from "./Triple";
+import {Triple} from "./Triple";
 
 export default class RdfParser {
     createRdfData(triples: Triple[]) {

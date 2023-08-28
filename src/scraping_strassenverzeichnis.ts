@@ -1,6 +1,5 @@
 import * as fs from 'fs/promises';
 import * as xml2js from 'xml2js';
-//import Triple from "./Triple";
 
 export default class ExtractSrassenverzeichnis {
     async parseXmlFile() {
