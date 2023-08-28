@@ -1,24 +1,21 @@
 export default class UploadService {
-  
-  private serverURL = 'http://92.206.209.228:3030/db';
-
   uploadData(rdfData: string) {
-    fetch(this.serverURL, {
-      method: 'POST',
+    fetch("http://92.206.209.228:3030/db", {
+      method: "POST",
       headers: {
-        'Content-type': 'text/turtle; charset=utf-8', 
+        "Content-type": "text/turtle; charset=utf-8", 
       },
       body: rdfData,
     })
     .then(response => {
       if (response.ok) {
-        console.log('Daten erfolgreich hochgeladen.');
+        console.log("Daten erfolgreich hochgeladen.");
       } else {
-        console.error('Fehler beim Hochladen der Daten.');
+        console.error("Fehler beim Hochladen der Daten.");
       }
     })
     .catch(error => {
-      console.error('Ein Fehler ist aufgetreten:', error);
+      console.error("Ein Fehler ist aufgetreten:", error);
     });
   }
 }

@@ -1,16 +1,3 @@
-// {
-//     "compilerOptions": {
-//         "target": "ES6",
-//         "outDir": "./dist",
-//         "moduleResolution": "node",
-//         "allowImportingTsExtensions": "true"
-//         // ...weitere Einstellungen...
-      
-//     },
-//     "include": ["src/**/*.ts"],
-//     "exclude": ["node_modules"]
-//   }
-
 {
     "compilerOptions": {
         "target": "es6",
