@@ -4,12 +4,9 @@
   "main": "index.js",
   "scripts": {
     "htmltodb": "scraping_leipziginfo.js",
-    "xmltodb": "xmltodb.js",
-    "build": "tsc",
     "start": "tsc && node dist/main.js"
   },
   "dependencies": {
-
   },
   "devDependencies": {
     "typescript": "^5.2.2",
