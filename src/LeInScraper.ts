@@ -8,11 +8,13 @@ export default class LeInScraper {
     urlHtml: string;
 
     constructor() {
+
     };
 
     async initUrlHtml() {
         this.urlHtml = await this.fetchHTML(this.url) ?? "";
     }
+
     async fetchHTML(url: string) {
         try {
             const response = await fetch(url);
@@ -26,6 +28,8 @@ export default class LeInScraper {
             return null;
         }
     }
+
+
     getData(search: string) {
         const $ = cheerio.load(this.urlHtml);
         const elementsList: string[] = [];
@@ -40,6 +44,7 @@ export default class LeInScraper {
         return elementsList;
 
     }
+
     getImageUrls() {
         const $ = cheerio.load(this.urlHtml);
         const imageUrls: string[] = [];
@@ -51,6 +56,7 @@ export default class LeInScraper {
 
         return imageUrls;
     }
+
     getHrefs() {
         const $ = cheerio.load(this.urlHtml);
         const elements = $('a.next[title="Weitere Informationen"]');
@@ -63,6 +69,7 @@ export default class LeInScraper {
 
         return hrefs;
     }
+
     deleteHouseNumber(inputString: string) {
 
         for (let i = inputString.length - 1; i >= 0 && inputString.length - i < 7; i--) {
@@ -76,4 +83,14 @@ export default class LeInScraper {
         }
         return inputString;
     }
+
+    
+
+
+
+
 }
+
+
+
+

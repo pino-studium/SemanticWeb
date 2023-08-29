@@ -1,3 +1,0 @@
-Strassenverzeichnis.xml
-    Quelle: https://opendata.leipzig.de/dataset/strassennamensverzeichnis
-    (Wurde angepasst da unerlaubte character für xml verwendet wurden.)
