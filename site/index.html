@@ -25,7 +25,7 @@
                 const fetchstreets = await fetch("http://92.206.209.228:3030/db/query", {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/sparql-query'
+                    'Content-Type': 'application/sparql-query'
                     },
                     body: `SELECT ?object
                         WHERE {
@@ -33,18 +33,15 @@
                             FILTER(STRSTARTS(STR(?subject), "https://github.com/pino-studium/streetory-tools") && ?predicate = <http://schema.org/name> )
                         }`
                 });
-                const jsonstreets = await fetchstreets.json();
-                const streets = JSON.parse(jsonstreets)
-                alert(jsonstreets);
-
-                jsonstreets.forEach(function (item) {
+                const streetlist = await fetchstreets.json();
+                var datalist = document.getElementById("datalist");
+                for (let i = 0; i < 3065; i++) {
                     var option = document.createElement('option');
-                    option.value = item;
-                    dataList.appendChild(option);
-                });
+                    option.value = streetlist["results"]["bindings"][i]["object"]["value"];
+                    datalist.appendChild(option);
+                }
             }
             getStreets();
-
         </script>
     </nav>
     <section>
@@ -76,6 +73,7 @@
                 L.marker([lat, lon]).addTo(map);
             }
             getCordinates()
+
         </script>
     </section>
 </body>
