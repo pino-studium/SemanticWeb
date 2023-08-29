@@ -1,6 +1,6 @@
 import LeInScraper from "./LeInScraper";
 import RdfParser from "./RdfParser";
-import UploadService from "./UploadService";
+import UploadService from "./FusekiService";
 import ExtractSrassenverzeichnis from "./scraping_strassenverzeichnis";
 
 
