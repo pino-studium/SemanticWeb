@@ -3,13 +3,13 @@ body {
     height: 100%;
     background-color: #4158D0;
     background-image: linear-gradient(143deg, #4158D0 0%, #C850C0 46%, #ff8770 100%);
-    color: rgb(2, 37, 65);
+    color: rgb(0, 0, 0);
     font-family: "Source Sans 3", sans-serif;
     font-size: 20px;
     font-weight: 400;
 }
 header {
-    color: inherit;
+    color: rgb(2, 37, 65);
     text-align: center;
     font-size: 70px;
     text-shadow: 1px 1px 4px rgba(0, 0, 10, 0.3);
@@ -29,7 +29,7 @@ input {
     outline: 0;
     font-size: 30px;
     font-family: inherit;
-    color: inherit;
+    color: rgb(2, 37, 65);
     box-sizing: border-box;
 }
 input::placeholder {
