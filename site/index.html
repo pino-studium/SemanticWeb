@@ -21,37 +21,30 @@
             <datalist id="datalist"></datalist>
         </form>
         <script>
-            var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
-            var datalist = document.getElementById("datalist");
-            var input = document.getElementById("input");
-            countries.forEach(function(item) {
-                var option = document.createElement('option');
-                option.value = item;
-                datalist.appendChild(option);
-            });
-
-
-
-
-
-
-            
-            async function executeSPARQLQuery() {
-                const response = await fetch("http://92.206.209.228:3030/db/query", {
+            async function getStreets(sparqlQuery) {
+                const fetchstreets = await fetch("http://92.206.209.228:3030/db/query", {
                     method: "POST",
                     headers: {"Content-Type": "application/sparql-query"},
-                    body:
-                        `SELECT ?object
-                        WHERE {
-                            ?subject ?predicate ?object .
-                            FILTER(STRSTARTS(STR(?subject), "https://github.com/pino-studium/streetory-tools") && ?predicate = <http://schema.org/name> )
-                        }`
+                    body: sparqlQuery
+                    });
+                const resultstreets = await fetchstreets.json();
+
+                console.log(jsonstreets); // ???
+
+                var jsonstreets = JSON.parse(resultstreets);
+                jsonstreets.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item;
+                    dataList.appendChild(option);
                 });
-                const result = await response.json();
-                return result;
             }
-            executeSPARQLQuery();
-            console.log(result);
+            const sparqlQuery =
+            `SELECT ?object
+            WHERE {
+            ?subject ?predicate ?object .
+            FILTER(STRSTARTS(STR(?subject), "https://github.com/pino-studium/streetory-tools") && ?predicate = <http://schema.org/name> )
+            }`;
+            getStreets(sparqlQuery)
         </script>
     </nav>
     <section>
