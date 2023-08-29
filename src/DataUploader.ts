@@ -1,12 +1,12 @@
 import LeInScraper from "./LeInScraper";
 import RdfParser from "./RdfParser";
-import UploadService from "./FusekiService";
+import FusekiService from "./FusekiService";
 import ExtractSrassenverzeichnis from "./scraping_strassenverzeichnis";
 
 
 export default class DataUploader {
  
-    uploadService = new UploadService();
+    uploadService = new FusekiService();
     rdfParser = new RdfParser();
 
     async runAll() {
