@@ -16,41 +16,15 @@
 <body>
     <header>streetory</header>
     <nav>
-        <form autocomplete="off">
-            <input type="text" id="input" list="datalist" placeholder="Straße eingeben...">
+        <form autocomplete="off" action="index.html">
+            <input type="text" id="input" list="datalist" name="strasse" placeholder="Nachmarkt">
             <datalist id="datalist"></datalist>
         </form>
-        <script>
-            async function getStreets() {
-                const fetchstreets = await fetch("http://92.206.209.228:3030/db/query", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/sparql-query'
-                    },
-                    body: `SELECT ?object
-                        WHERE {
-                            ?subject ?predicate ?object .
-                            FILTER(STRSTARTS(STR(?subject), "https://github.com/pino-studium/streetory-tools") && ?predicate = <http://schema.org/name> )
-                        }`
-                });
-                const jsonstreets = await fetchstreets.json();
-                const streets = JSON.parse(jsonstreets)
-                alert(jsonstreets);
-
-                jsonstreets.forEach(function (item) {
-                    var option = document.createElement('option');
-                    option.value = item;
-                    dataList.appendChild(option);
-                });
-            }
-            getStreets();
-
-        </script>
     </nav>
     <section>
-        <h2 id="Tname">Straße</h2>
+        <h2>Straße</h2>
         <p id="name">Naschmarkt</p>
-        <h2 id="Terlaeuterung">Erläuterung</h2>
+        <h2>Erläuterung</h2>
         <p id="erlaeuterung">Traditionelle Bezeichnung für den 1556 angelegten Platz, auf dem die Händler „Zukost und
             Naschwerk, auch gesalzene Fische feilboten“. Auf den Böden über den dortigen Fleischbänken trat zwischen
             1727 und 1749 Caroline Neuber mit ihren Komödianten auf. Mit dem Bau der barocken Handelsbörse von 1678 bis
@@ -58,26 +32,58 @@
             1908/09 entstand anstelle des historischen Burgkellers (von 1572) das Messehaus Handelshof. Der Burgkeller
             ist das älteste Gasthaus Leipzigs (1419 erstmals erwähnt). Am Naschmarkt befinden sich das 1903 von Carl
             Ludwig Seffner geschaffene Goethedenkmal und der Löwenbrunnen (1918 von Hugo Licht erneuert).</p>
-        <h2 id="Tmap">Karte</h2>
+        <h2>Karte</h2>
         <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab" tabindex="0"></div>
-        <h2 id="sname">Sehenswürdigkeit</h2>
-        <a id="sname" href="https://www.leipziginfo.de/adressen/ort/alte-boerse/">Alte Börse</a>
-        <img id="sbild" src="https://www.leipziginfo.de/fileadmin/_processed_/e/7/csm_alte-boerse-01_d030fb277e.jpg">
-        <script>
-            const DEBUGstreet = "Grimmaische Straße";
-
-            async function getCordinates() {
-                const response = await fetch(`https://nominatim.openstreetmap.org/search?street=${DEBUGstreet}&city=Leipzig&format=jsonv2&countrycodes=de&limit=1`);
-                const result = await response.json();
-                let lat = result[0].lat;
-                let lon = result[0].lon;
-                let map = L.map('map', { zoomControl: false }).setView([lat, lon], 18);
-                L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "OpenStreetMap" }).addTo(map);
-                L.marker([lat, lon]).addTo(map);
-            }
-            getCordinates()
-        </script>
+        <h2>Sehenswürdigkeit</h2>
+        <a id="sehenswuerdigkeit" href="https://www.leipziginfo.de/adressen/ort/alte-boerse/">Alte Börse</a>
+        <img id="bild" src="https://www.leipziginfo.de/fileadmin/_processed_/e/7/csm_alte-boerse-01_d030fb277e.jpg">
     </section>
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        let streetName = urlParams.get('strasse');
+        if (streetName == null) {
+            streetName = "Naschmarkt";
+        }
+        
+        async function getStreetList() {
+            const fetchstreets = await fetch("http://92.206.209.228:3030/db/query", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/sparql-query'
+                },
+                body: `SELECT ?object
+                        WHERE {
+                            ?subject ?predicate ?object .
+                            FILTER(STRSTARTS(STR(?subject), "https://github.com/pino-studium/streetory-tools") && ?predicate = <http://schema.org/name> )
+                        }`
+            });
+            const streetlist = await fetchstreets.json();
+            var datalist = document.getElementById("datalist");
+            for (let i = 0; i < streetlist["results"]["bindings"].length; i++) {
+                var option = document.createElement('option');
+                option.value = streetlist["results"]["bindings"][i]["object"]["value"];
+                datalist.appendChild(option);
+            }
+        }
+        async function setMap() {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?street=${streetName}&city=Leipzig&format=jsonv2&countrycodes=de&limit=1`);
+            const result = await response.json();
+            let lat = result[0].lat;
+            let lon = result[0].lon;
+            let map = L.map('map', { zoomControl: false }).setView([lat, lon], 18);
+            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "OpenStreetMap" }).addTo(map);
+            L.marker([lat, lon]).addTo(map);
+        }
+        
+        document.getElementById("input").setAttribute("placeholder", streetName);
+        document.getElementById("name").innerHTML = streetName;
+        document.getElementById("erlaeuterung").innerHTML = streetName;
+        setMap();
+        document.getElementById("sehenswuerdigkeit").innerHTML = streetName;
+        document.getElementById("sehenswuerdigkeit").setAttribute("href", streetName);
+        document.getElementById("bild").setAttribute("src", streetName);
+        getStreetList();
+    </script>
 </body>
-
 </html>
