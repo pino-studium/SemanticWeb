@@ -8,7 +8,7 @@ export default class ExtractSrassenverzeichnis {
         const resultErlaeuterung: string[] = [];
         const resultAll: string[][] = [resultSchluessel, resultName, resultErlaeuterung];
         try {
-            const xmlData = await fs.readFile('src/Strassenverzeichnis.xml', 'utf-8');
+            const xmlData = await fs.readFile('src/input/Strassenverzeichnis.xml', 'utf-8');
             const parser = new xml2js.Parser();
             const result = await parser.parseStringPromise(xmlData);
             // Überprüfen Sie, ob das `result`-Objekt und die erforderlichen Eigenschaften vorhanden sind
@@ -21,7 +21,7 @@ export default class ExtractSrassenverzeichnis {
                         const name = stammdaten.NAME && stammdaten.NAME[0].trim();
                         const schluessel = stammdaten.SCHLUESSEL && stammdaten.SCHLUESSEL[0].trim();
                         if (name && erlaeuterung && schluessel) {
-                            resultSchluessel.push("https://github.com/pino-studium/streetory-tools/" + schluessel);
+                            resultSchluessel.push("https://github.com/pino-studium/streetory/" + schluessel);
                             resultName.push(name);
                             resultErlaeuterung.push(erlaeuterung);
                         }

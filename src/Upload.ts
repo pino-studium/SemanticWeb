@@ -1,8 +1,6 @@
 import DataUploader from "./DataUploader";
-
-async function main() {
+async function upload() {
     const dataUploader = new DataUploader();
     dataUploader.runAll();
 }
-
-main();
+upload();

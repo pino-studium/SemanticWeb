@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "htmltodb": "scraping_leipziginfo.js",
-    "start": "tsc && node dist/main.js"
+    "upload": "tsc && node src/upload.js"
   },
   "dependencies": {
   },
