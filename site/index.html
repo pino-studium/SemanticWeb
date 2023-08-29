@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Streetory</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="script.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
+
 <body>
     <header>streetory</header>
     <nav>
@@ -17,22 +21,50 @@
             <datalist id="datalist"></datalist>
         </form>
         <script>
+            var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
             var datalist = document.getElementById("datalist");
             var input = document.getElementById("input");
-
-            var jsonOptions = JSON.parse(streets);
-            jsonOptions.forEach(function(item) {
+            countries.forEach(function(item) {
                 var option = document.createElement('option');
                 option.value = item;
-                dataList.appendChild(option);
+                datalist.appendChild(option);
             });
+
+
+
+
+
+
+            
+            async function executeSPARQLQuery() {
+                const response = await fetch("http://92.206.209.228:3030/db/query", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/sparql-query"},
+                    body:
+                        `SELECT ?object
+                        WHERE {
+                            ?subject ?predicate ?object .
+                            FILTER(STRSTARTS(STR(?subject), "https://github.com/pino-studium/streetory-tools") && ?predicate = <http://schema.org/name> )
+                        }`
+                });
+                const result = await response.json();
+                return result;
+            }
+            executeSPARQLQuery();
+            console.log(result);
         </script>
     </nav>
     <section>
         <h2 id="Tname">Straße</h2>
         <p id="name">Naschmarkt</p>
         <h2 id="Terlaeuterung">Erläuterung</h2>
-        <p id="erlaeuterung">Traditionelle Bezeichnung für den 1556 angelegten Platz, auf dem die Händler „Zukost und Naschwerk, auch gesalzene Fische feilboten“. Auf den Böden über den dortigen Fleischbänken trat zwischen 1727 und 1749 Caroline Neuber mit ihren Komödianten auf. Mit dem Bau der barocken Handelsbörse von 1678 bis 1682 erhielt der Platz seinen nördlichen Abschluss und zugleich Bedeutung als Treffpunkt der Handelswelt. 1908/09 entstand anstelle des historischen Burgkellers (von 1572) das Messehaus Handelshof. Der Burgkeller ist das älteste Gasthaus Leipzigs (1419 erstmals erwähnt). Am Naschmarkt befinden sich das 1903 von Carl Ludwig Seffner geschaffene Goethedenkmal und der Löwenbrunnen (1918 von Hugo Licht erneuert).</p>
+        <p id="erlaeuterung">Traditionelle Bezeichnung für den 1556 angelegten Platz, auf dem die Händler „Zukost und
+            Naschwerk, auch gesalzene Fische feilboten“. Auf den Böden über den dortigen Fleischbänken trat zwischen
+            1727 und 1749 Caroline Neuber mit ihren Komödianten auf. Mit dem Bau der barocken Handelsbörse von 1678 bis
+            1682 erhielt der Platz seinen nördlichen Abschluss und zugleich Bedeutung als Treffpunkt der Handelswelt.
+            1908/09 entstand anstelle des historischen Burgkellers (von 1572) das Messehaus Handelshof. Der Burgkeller
+            ist das älteste Gasthaus Leipzigs (1419 erstmals erwähnt). Am Naschmarkt befinden sich das 1903 von Carl
+            Ludwig Seffner geschaffene Goethedenkmal und der Löwenbrunnen (1918 von Hugo Licht erneuert).</p>
         <h2 id="Tmap">Karte</h2>
         <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab" tabindex="0"></div>
         <h2 id="sname">Sehenswürdigkeit</h2>
@@ -46,12 +78,13 @@
                 const result = await response.json();
                 let lat = result[0].lat;
                 let lon = result[0].lon;
-                let map = L.map('map',{zoomControl: false }).setView([lat, lon], 18);
-                L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 19, attribution: "OpenStreetMap"}).addTo(map);
+                let map = L.map('map', { zoomControl: false }).setView([lat, lon], 18);
+                L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "OpenStreetMap" }).addTo(map);
                 L.marker([lat, lon]).addTo(map);
             }
             getCordinates()
         </script>
     </section>
 </body>
+
 </html>
