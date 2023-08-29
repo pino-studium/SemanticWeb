@@ -21,6 +21,7 @@ class DataUploader {
     runAll() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.uploadLeInData();
+            yield this.processExtractSrassenverzeichnis();
         });
     }
     uploadLeInData() {
@@ -50,8 +51,7 @@ class DataUploader {
             const schluessel = parsedXmlData[0];
             const names = parsedXmlData[1];
             const erlaeuterung = parsedXmlData[2];
-            const triples = this.rdfParser.createTriples(schluessel, `http://schema.org/name`, names)
-                .concat(this.rdfParser.createTriples(schluessel, `https://schema.org/description`, erlaeuterung));
+            const triples = this.rdfParser.createTriples(schluessel, `http://schema.org/name`, names).concat(this.rdfParser.createTriples(schluessel, `https://schema.org/description`, erlaeuterung));
             const rdfData = this.rdfParser.createRdfData(triples);
             console.log(rdfData);
             this.uploadService.uploadData(rdfData);

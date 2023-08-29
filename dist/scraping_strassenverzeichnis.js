@@ -19,19 +19,19 @@ class ExtractSrassenverzeichnis {
             const resultErlaeuterung = [];
             const resultAll = [resultSchluessel, resultName, resultErlaeuterung];
             try {
-                const xmlData = yield fs.readFile('src/Strassenverzeichnis.xml', 'utf-8');
+                const xmlData = yield fs.readFile('src/input/Strassenverzeichnis.xml', 'utf-8');
                 const parser = new xml2js.Parser();
                 const result = yield parser.parseStringPromise(xmlData);
                 if (result && result.Strassenverzeichnis && result.Strassenverzeichnis.STRASSE && Array.isArray(result.Strassenverzeichnis.STRASSE)) {
                     const strassen = result.Strassenverzeichnis.STRASSE;
                     for (const strasseData of strassen) {
                         const stammdaten = strasseData.STAMMDATEN && Array.isArray(strasseData.STAMMDATEN) ? strasseData.STAMMDATEN[0] : null;
-                        const erlaeuterung = strasseData.ERKLAERUNG && Array.isArray(strasseData.ERKLAERUNG) ? strasseData.ERKLAERUNG[0].ERLAEUTERUNG[0] : null;
+                        const erlaeuterung = strasseData.ERKLAERUNG && Array.isArray(strasseData.ERKLAERUNG) ? strasseData.ERKLAERUNG[0].ERLAEUTERUNG[0].trim() : null;
                         if (stammdaten) {
                             const name = stammdaten.NAME && stammdaten.NAME[0].trim();
                             const schluessel = stammdaten.SCHLUESSEL && stammdaten.SCHLUESSEL[0].trim();
                             if (name && erlaeuterung && schluessel) {
-                                resultSchluessel.push(schluessel);
+                                resultSchluessel.push("https://github.com/pino-studium/streetory/" + schluessel);
                                 resultName.push(name);
                                 resultErlaeuterung.push(erlaeuterung);
                             }

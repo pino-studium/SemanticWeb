@@ -9,18 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const FusekiService_1 = require("./FusekiService");
+const DataUploader_1 = require("./DataUploader");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const sparqlQuery = `
-        SELECT ?subject ?predicate ?object
-        WHERE {
-        ?subject ?predicate ?object .
-        } LIMIT 100
-        `;
-        const fusekiService = new FusekiService_1.default();
-        const result = yield fusekiService.sparqlQuery(sparqlQuery);
-        console.log(fusekiService.formatSPARQLResults(result));
+        const dataUploader = new DataUploader_1.default();
+        dataUploader.runAll();
     });
 }
 main();

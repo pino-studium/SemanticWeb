@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Triple_1 = require("./Triple");
 class RdfParser {
     createRdfData(triples) {
-        var rdfData = '';
+        var rdfData = "";
         for (let i = 0; i < triples.length; i++) {
             rdfData = rdfData + `${this.refactorString(triples[i].subject)} ${this.refactorString(triples[i].predicate)} ${this.refactorString(triples[i].object)} .\n`;
         }
