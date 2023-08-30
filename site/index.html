@@ -23,20 +23,14 @@
     </nav>
     <section>
         <h2>Straße</h2>
-        <p id="name">Naschmarkt</p>
+        <p id="name"></p>
         <h2>Erläuterung</h2>
-        <p id="erlaeuterung">Traditionelle Bezeichnung für den 1556 angelegten Platz, auf dem die Händler „Zukost und
-            Naschwerk, auch gesalzene Fische feilboten“. Auf den Böden über den dortigen Fleischbänken trat zwischen
-            1727 und 1749 Caroline Neuber mit ihren Komödianten auf. Mit dem Bau der barocken Handelsbörse von 1678 bis
-            1682 erhielt der Platz seinen nördlichen Abschluss und zugleich Bedeutung als Treffpunkt der Handelswelt.
-            1908/09 entstand anstelle des historischen Burgkellers (von 1572) das Messehaus Handelshof. Der Burgkeller
-            ist das älteste Gasthaus Leipzigs (1419 erstmals erwähnt). Am Naschmarkt befinden sich das 1903 von Carl
-            Ludwig Seffner geschaffene Goethedenkmal und der Löwenbrunnen (1918 von Hugo Licht erneuert).</p>
+        <p id="description">Nicht Vorhanden.</p>
         <h2>Karte</h2>
         <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab" tabindex="0"></div>
         <h2>Sehenswürdigkeit</h2>
-        <a id="sehenswuerdigkeit" href="https://www.leipziginfo.de/adressen/ort/alte-boerse/">Alte Börse</a>
-        <img id="bild" src="https://www.leipziginfo.de/fileadmin/_processed_/e/7/csm_alte-boerse-01_d030fb277e.jpg">
+        <a id="sightseeing" href="">Keine</a>
+        <img id="image" src="">
     </section>
     <script>
         const queryString = window.location.search;
@@ -45,7 +39,67 @@
         if (streetName == null) {
             streetName = "Naschmarkt";
         }
-        
+        async function getData() {
+            document.getElementById("input").setAttribute("placeholder", streetName);
+            document.getElementById("name").innerHTML = streetName;
+            const fetchstreetId = await fetch("http://92.206.209.228:3030/db/query", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/sparql-query'
+                },
+                body: `SELECT ?subject
+                    WHERE {
+                        ?subject ?predicate ?object .
+                        FILTER(?object = "${streetName}" && ?predicate = <http://schema.org/name> )
+                    }`
+            });
+            const getstreetId = await fetchstreetId.json();
+            const streetId = getstreetId["results"]["bindings"][0]["subject"]["value"];
+            const fetchdescription = await fetch("http://92.206.209.228:3030/db/query", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/sparql-query'
+                },
+                body: `SELECT ?object
+                    WHERE {
+                        ?subject ?predicate ?object .
+                        FILTER(?subject = <${streetId}> && ?predicate = <https://schema.org/description>)
+                    }`
+            });
+            const getdescription = await fetchdescription.json();
+            const description = getdescription["results"]["bindings"][0]["object"]["value"];
+            document.getElementById("description").innerHTML = description;
+            const fetchsightseeing = await fetch("http://92.206.209.228:3030/db/query", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/sparql-query'
+                },
+                body: `SELECT ?subject
+                    WHERE {
+                        ?subject ?predicate ?object .
+                        FILTER(?object = "${streetName}" && ?predicate = <http://schema.org/PostalAddress> )
+                    }`
+            });
+            const getsightseeing = await fetchsightseeing.json();
+            const sightseeing = getsightseeing["results"]["bindings"][0]["subject"]["value"];
+            document.getElementById("sightseeing").setAttribute("href", sightseeing);
+            const fetchsightseeinginfo = await fetch("http://92.206.209.228:3030/db/query", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/sparql-query'
+                },
+                body: `SELECT ?object
+                    WHERE {
+                        ?subject ?predicate ?object .
+                        FILTER(?subject = <${sightseeing}>)
+                    }`
+            });
+            const getsightseeinginfo = await fetchsightseeinginfo.json();
+            const sightseeingname = getsightseeinginfo["results"]["bindings"][0]["object"]["value"];
+            const sightseeingimage = getsightseeinginfo["results"]["bindings"][1]["object"]["value"];
+            document.getElementById("sightseeing").innerHTML = sightseeingname;
+            document.getElementById("image").setAttribute("src", sightseeingimage);
+        }
         async function getStreetList() {
             const fetchstreets = await fetch("http://92.206.209.228:3030/db/query", {
                 method: 'POST',
@@ -66,7 +120,7 @@
                 datalist.appendChild(option);
             }
         }
-        async function setMap() {
+        async function getMap() {
             const response = await fetch(`https://nominatim.openstreetmap.org/search?street=${streetName}&city=Leipzig&format=jsonv2&countrycodes=de&limit=1`);
             const result = await response.json();
             let lat = result[0].lat;
@@ -75,14 +129,8 @@
             L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "OpenStreetMap" }).addTo(map);
             L.marker([lat, lon]).addTo(map);
         }
-        
-        document.getElementById("input").setAttribute("placeholder", streetName);
-        document.getElementById("name").innerHTML = streetName;
-        document.getElementById("erlaeuterung").innerHTML = streetName;
-        setMap();
-        document.getElementById("sehenswuerdigkeit").innerHTML = streetName;
-        document.getElementById("sehenswuerdigkeit").setAttribute("href", streetName);
-        document.getElementById("bild").setAttribute("src", streetName);
+        getData();
+        getMap();
         getStreetList();
     </script>
 </body>
