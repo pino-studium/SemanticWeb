@@ -10,7 +10,7 @@ export default class ExtractSrassenverzeichnis {
         const resultAll: string[][] = [resultSchluessel,resultName,resultErlaeuterung];
 
         try {
-            const xmlData = await fs.readFile('src/Strassenverzeichnis.xml', 'utf-8');
+            const xmlData = await fs.readFile('tools/Strassenverzeichnis.xml', 'utf-8');
 
             const parser = new xml2js.Parser();
             const result = await parser.parseStringPromise(xmlData);
