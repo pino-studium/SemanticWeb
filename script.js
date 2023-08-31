@@ -5,7 +5,7 @@ if (streetName == null) {
     streetName = "Naschmarkt";
 }
 async function getData() {
-    document.getElementById("input").setAttribute("placeholder", streetName);
+    document.getElementById("input").setAttribute("value", streetName);
     document.getElementById("name").innerHTML = streetName;
     const fetchstreetId = await fetch("http://92.206.209.228:3030/db/query", {
         method: 'POST',
