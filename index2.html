@@ -6,34 +6,31 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        section {
+            width: 800px;
+            height: 800px;
+            padding: 20px 20px 20px 20px;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
     <header>streetory</header>
-    <nav>
-        <form autocomplete="off" action="index.html">
-            <input type="text" id="input" list="datalist" name="strasse" placeholder="Nachmarkt">
-            <datalist id="datalist"></datalist>
-        </form>
-    </nav>
-    <section>
-        <h2>Straße</h2>
-        <p id="name"></p>
-        <h2>Erläuterung</h2>
-        <p id="description">Nicht Vorhanden.</p>
-        <h2>Karte</h2>
+    <section >
         <div id="map" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab" tabindex="0"></div>
-        <h2>Sehenswürdigkeit</h2>
-        <a id="sightseeing" href="">Keine</a>
-        <img id="image" src="">
     </section>
-    <script type="text/javascript" src="script.js"></script>
-    
-    
+    <script type="text/javascript" src="script2.js"></script>
+
+
 </body>
+
 </html>

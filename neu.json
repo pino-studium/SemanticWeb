@@ -1,0 +1,23 @@
+[
+    {
+        "place_id": 112809776,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 30244963,
+        "lat": "51.3399167",
+        "lon": "12.3746593",
+        "category": "highway",
+        "type": "pedestrian",
+        "place_rank": 26,
+        "importance": 0.10000999999999993,
+        "addresstype": "road",
+        "name": "Markt",
+        "display_name": "Markt, Zentrum, Mitte, Leipzig, Sachsen, 04109, Deutschland",
+        "boundingbox": [
+            "51.3399141",
+            "51.3399172",
+            "12.3743811",
+            "12.3750387"
+        ]
+    }
+]

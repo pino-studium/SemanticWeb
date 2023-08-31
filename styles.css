@@ -8,6 +8,7 @@ body {
     font-family: "Source Sans 3", sans-serif;
     font-size: 20px;
     font-weight: 400;
+    padding-bottom: 20px;
 }
 header {
     color: rgb(2, 37, 65);
@@ -37,6 +38,7 @@ input::placeholder {
     font-family: inherit;
     color: inherit;
 }
+
 section {
     width: 600px;
     margin: auto;
@@ -48,6 +50,7 @@ section {
     border-style: solid;
     padding: 10px 20px 20px 20px;
     box-sizing: border-box;
+    margin-bottom: 100px;
 }
 h2 {
     display: block;
@@ -94,3 +97,4 @@ a:active {
     color: black;
     text-decoration: none;
 }
+

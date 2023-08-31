@@ -21,16 +21,16 @@ export default class DataUploader {
         const sightsStreet = leInScraper.getData('streetAddress')
         const sightsImage = leInScraper.getImageUrls();
         const sightsHref = leInScraper.getHrefs();
-        const sightsStreetWithoutNumber: string[] = [];
-        sightsStreet.forEach(inputString => {
-            sightsStreetWithoutNumber.push(leInScraper.deleteHouseNumber(inputString));
-        });
+        //const sightsStreetWithoutNumber: string[] = [];
+        // sightsStreet.forEach(inputString => {
+        //     sightsStreetWithoutNumber.push(leInScraper.deleteHouseNumber(inputString));
+        // });
 
 
 
         const triples = this.rdfParser.createTriples(sightsHref, `http://schema.org/name`, sightsName)
             .concat(this.rdfParser.createTriples(sightsHref, `http://schema.org/image`, sightsImage))
-            .concat(this.rdfParser.createTriples(sightsHref, `http://schema.org/PostalAddress`, sightsStreetWithoutNumber));
+            .concat(this.rdfParser.createTriples(sightsHref, `http://schema.org/PostalAddress`, sightsStreet));
 
         const rdfData = this.rdfParser.createRdfData(triples);
         console.log(rdfData);
