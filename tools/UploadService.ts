@@ -1,6 +1,6 @@
 export default class UploadService {
   
-  private serverURL = 'http://92.206.209.228:3030/db';
+  private serverURL = 'http://92.206.214.78:3030/db';
 
   uploadData(rdfData: string) {
     fetch(this.serverURL, {

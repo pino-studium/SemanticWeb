@@ -1,5 +1,5 @@
 async function getFusekiData(body, valueType = "object") {
-    const fetchData = await fetch("http://92.206.209.228:3030/db/query", {
+    const fetchData = await fetch("http://92.206.214.78:3030/db/query", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/sparql-query'
