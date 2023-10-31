@@ -7,9 +7,10 @@ if (streetName == null) {
 async function getData() {
     document.getElementById("input").setAttribute("value", streetName);
     document.getElementById("name").innerHTML = streetName;
-    const fetchstreetId = await fetch("http://92.206.214.78:3030/db/query", {
+    const fetchstreetId = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
+            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?subject
@@ -20,9 +21,10 @@ async function getData() {
     });
     const getstreetId = await fetchstreetId.json();
     const streetId = getstreetId["results"]["bindings"][0]["subject"]["value"];
-    const fetchdescription = await fetch("http://92.206.214.78:3030/db/query", {
+    const fetchdescription = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
+            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?object
@@ -34,9 +36,10 @@ async function getData() {
     const getdescription = await fetchdescription.json();
     const description = getdescription["results"]["bindings"][0]["object"]["value"];
     document.getElementById("description").innerHTML = description;
-    const fetchsightseeing = await fetch("http://92.206.214.78:3030/db/query", {
+    const fetchsightseeing = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
+            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?subject
@@ -48,9 +51,10 @@ async function getData() {
     const getsightseeing = await fetchsightseeing.json();
     const sightseeing = getsightseeing["results"]["bindings"][0]["subject"]["value"];
     document.getElementById("sightseeing").setAttribute("href", sightseeing);
-    const fetchsightseeinginfo = await fetch("http://92.206.214.78:3030/db/query", {
+    const fetchsightseeinginfo = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
+            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?object
@@ -66,9 +70,10 @@ async function getData() {
     document.getElementById("image").setAttribute("src", sightseeingimage);
 }
 async function getStreetList() {
-    const fetchstreets = await fetch("http://92.206.214.78:3030/db/query", {
+    const fetchstreets = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
+            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?object
