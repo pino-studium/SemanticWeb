@@ -10,7 +10,7 @@ async function getData() {
     const fetchstreetId = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
-            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
+            'Authorization': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?subject
@@ -24,7 +24,7 @@ async function getData() {
     const fetchdescription = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
-            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
+            'Authorization': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?object
@@ -39,7 +39,7 @@ async function getData() {
     const fetchsightseeing = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
-            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
+            'Authorization': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?subject
@@ -54,7 +54,7 @@ async function getData() {
     const fetchsightseeinginfo = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
-            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
+            'Authorization': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?object
@@ -73,7 +73,7 @@ async function getStreetList() {
     const fetchstreets = await fetch("http://141.57.9.111:3032/db/query", {
         method: 'POST',
         headers: {
-            'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
+            'Authorization': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
             'Content-Type': 'application/sparql-query'
         },
         body: `SELECT ?object

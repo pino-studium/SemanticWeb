@@ -6,7 +6,7 @@ export default class UploadService {
     fetch(this.serverURL, {
       method: 'POST',
       headers: {
-        'Authorizatio': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
+        'Authorization': 'Basic '+btoa('admin:ieb3Oo.p0ooche5'),
         'Content-type': 'text/turtle; charset=utf-8', 
       },
       body: rdfData,
